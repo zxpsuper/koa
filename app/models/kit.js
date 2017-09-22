@@ -9,4 +9,6 @@ kittySchema.methods.speak = function () {
   console.log(greeting)
 }
 var Kitten = mongoose.model('Kitten', kittySchema)
-module.exports = Kitten
+
+module.exports.Kitten = Kitten
+module.exports.kittySchema = kittySchema
