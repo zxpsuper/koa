@@ -21,6 +21,7 @@ db.once('open', function (callback) {
 })
 require('./app/models/user')
 require('./app/models/kit')
+require('./app/models/book')
 
 // var models_path = path.join(__dirname, '/app/models')
 // var walk = function(modelPath) {
@@ -43,6 +44,7 @@ require('./app/models/kit')
 
 const index = require('./routes/index')
 const users = require('./routes/users')
+const book = require('./routes/book')
 
 // error handler
 onerror(app)
@@ -70,6 +72,7 @@ app.use(async (ctx, next) => {
 // routes
 app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
+app.use(book.routes(), book.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {

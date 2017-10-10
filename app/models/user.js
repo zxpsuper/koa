@@ -22,7 +22,7 @@ var UserSchema = new mongoose.Schema({
     },
   }
 })
-// 存储前的毁掉函数
+//存储前的毁掉函数
 // UserSchema.pre('save', function(next) {
 //   if(!this.isNew) {
 //     this.meta.updateAt = Date.now()
