@@ -1,59 +1,37 @@
+const M = require('../methods')
 const router = require('koa-router')()
 var mongoose = require('mongoose')
+var findOne = require('../methods')
 var xss = require('xss')
-var User = mongoose.model('haha')
-var Kitten = mongoose.model('Kitten')
+var User = mongoose.model('users')
 // 前缀
 router.prefix('/users')
 
 router.get('/', async function (ctx, next) {
-  ctx.body = 'this is a users response!'+ supe
+  ctx.body = 'this is a users response!'
 })
 
-router.get('/bar', async function (ctx, next) {
-  let pp = ctx.query.p
-  var silence = new User({ name: `${pp}` , password:'123123123', kaka:'woaini'})
-  console.log(silence.name) 
-  // var fluffy = new Kitten({ name: `${pp}` })
-  // fluffy.speak() 
-  // silence.save(function (err, users) {
-  //   if (err) return console.error(err)
-  // })
-   // const res = await findAll()
-  async function save() {
-    return new Promise((ok, fail) => {
-      silence.save(function (err, kittens) {
-        if (err) fail(err)
-        ok(kittens)
-      })
-    })
+router.post('/register', async function (ctx, next) {
+  // let userName = ctx.query.userName
+  let { userName, password, phoneNumber, email } = ctx.request.body
+  let t = await M.findOne({userName: userName.toUpperCase()}, User)
+  if (t !== null) {
+    ctx.response.body = {
+      code: 202,
+      message: '用户名已经存在'
+    }
+    return
   }
-  await save()
-  const res = await findAlls()
 
-  ctx.response.body = res
-  // {dfdasf:'sdfdaf'}
+  var silence = new User({ userName, password, phoneNumber, email })
+  silence.capitalizeName()
+
+  // 保存用户储存信息
+  await M.save(silence)
+  ctx.response.body = {
+    code: 200,
+    message: '注册成功'
+  }
 })
-
-async function findAll() {
-  return new Promise((ok, fail) => {
-    Kitten.find({},function (err, kittens) {
-      if (err) fail(err)
-      ok(kittens)
-    })
-  })
-}
-
-async function findAlls() {
-  return new Promise((ok, fail) => {
-    User.find({},function (err, kittens) {
-      if (err) fail(err)
-      ok(kittens)
-    })
-  })
-}
-
 
 module.exports = router
-
-

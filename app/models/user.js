@@ -1,16 +1,15 @@
 var mongoose = require('mongoose')
 
 var UserSchema = new mongoose.Schema({
-  // phoneNumber: {
-  //   unique: true,
-  //   type: Number
-  // },
-  name: {
+  phoneNumber: String,
+  userName: {
     unique: true,
-    type: Number
+    type: String
   },
   password: String,
   age: String,
+  email: String,
+  score: Number,
   meta: {
     createAt: {
       type: Date,
@@ -22,18 +21,13 @@ var UserSchema = new mongoose.Schema({
     },
   }
 })
-//存储前的毁掉函数
-// UserSchema.pre('save', function(next) {
-//   if(!this.isNew) {
-//     this.meta.updateAt = Date.now()
-//   }
-// })
 
+// 定义表单方法——字符串转化为大写
 UserSchema.methods.capitalizeName = function () {
-  this.name = this.name.toUpperCase();
-  return this.name;
+  this.userName = this.userName.toUpperCase();
+  return this.userName;
 }
 
-var UserModel = mongoose.model('haha', UserSchema)
+var UserModel = mongoose.model('users', UserSchema)
 
 module.exports = UserModel 

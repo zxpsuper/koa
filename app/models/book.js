@@ -27,11 +27,6 @@ BookSchema.pre('save', function(next) {
   }
 })
 
-// UserSchema.methods.capitalizeName = function () {
-//   this.name = this.name.toUpperCase();
-//   return this.name;
-// }
-
 var BookModel = mongoose.model('book', BookSchema)
 
 module.exports = BookModel 

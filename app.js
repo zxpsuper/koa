@@ -12,7 +12,10 @@ var mongoose = require('mongoose')
 var dbs = 'mongodb://localhost/super'
 
 mongoose.Promise = require('bluebird')
-mongoose.connect(dbs)
+mongoose.connect(dbs, {
+  useMongoClient: true
+  /* other options */
+})
 
 var db = mongoose.connection
 db.on('error', console.error.bind(console, 'connection error:'))
