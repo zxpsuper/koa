@@ -25,30 +25,9 @@ db.once('open', function (callback) {
 require('./app/models/user')
 require('./app/models/kit')
 require('./app/models/book')
-
-// var models_path = path.join(__dirname, '/app/models')
-// var walk = function(modelPath) {
-//   fs
-//     .readdirSync(modelPath)
-//     .forEach(function(file) {
-//       var filePath = path.join(modelPath, '/' + file)
-//       var stat = fs.stat.Sync(filePath)
-      
-//       if(stat.isFile()) {
-//         if (/(.*)\.(js|coffee)/.test(file)) {
-//           require(filePath)
-//         }
-//       } else if (stat.isDirectory()){
-//         walk(filePath)
-//       }
-//     })
-// }
-
-
+// router
 const index = require('./routes/index')
-const users = require('./routes/users')
-const book = require('./routes/book')
-
+index(app)
 // error handler
 onerror(app)
 
@@ -71,11 +50,6 @@ app.use(async (ctx, next) => {
   const ms = new Date() - start
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
-
-// routes
-app.use(index.routes(), index.allowedMethods())
-app.use(users.routes(), users.allowedMethods())
-app.use(book.routes(), book.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {

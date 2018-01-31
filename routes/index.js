@@ -1,21 +1,12 @@
-const router = require('koa-router')()
+const Book = require('./book');
+const User = require('./users');
+const Default = require('./default');
 
+function app(app) {
+  app.use(Book.routes(), Book.allowedMethods())
+  app.use(User.routes(), User.allowedMethods())
+  app.use(Default.routes(), Default.allowedMethods())
+  
+}
 
-router.get('/', async (ctx, next) => {
-  await ctx.render('index', {
-    title: 'Hello Koa 2!'
-  })
-})
-
-router.get('/string', async (ctx, next) => {
-  ctx.body = 'koa2 string'
-})
-
-router.get('/json', async (ctx, next) => {
-  ctx.body = {
-    title: 'koa2 json'
-  }
-})
-
-
-module.exports = router
+module.exports = app

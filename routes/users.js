@@ -4,6 +4,7 @@ var mongoose = require('mongoose')
 var findOne = require('../methods')
 var xss = require('xss')
 var User = mongoose.model('users')
+
 // 前缀
 router.prefix('/users')
 
