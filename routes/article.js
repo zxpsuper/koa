@@ -5,7 +5,7 @@ var Article = mongoose.model('articles')
 
 // 前缀
 router.prefix('/articles')
-
+// 创建文章
 router.post('/create', async function (ctx, next) {
   let { title, author, authorImg, desc, subject } = ctx.request.body
   try {
@@ -31,6 +31,7 @@ router.post('/create', async function (ctx, next) {
     }
   }
 })
+// 获取所有文章
 router.get('/getAll', async function (ctx, next) {
   try {
     let t = await M.findAlls(Article)
@@ -46,6 +47,7 @@ router.get('/getAll', async function (ctx, next) {
     }
   }
 })
+// 根据id获取文章
 router.get('/getById/:id', async function (ctx, next) {
   let _id = ctx.params.id
   try {
@@ -69,6 +71,7 @@ router.get('/getById/:id', async function (ctx, next) {
     }
   }
 })
+// 根据id更新文章
 router.post('/update', async function (ctx, next) {
   let { id, title, author, authorImg, desc, subject } = ctx.request.body
   try {
@@ -95,6 +98,7 @@ router.post('/update', async function (ctx, next) {
     }
   }
 })
+// 根据id删除文章
 router.delete('/delete/:id', async function (ctx, next) {
   let _id = ctx.params.id
   try {
