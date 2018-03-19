@@ -11,7 +11,7 @@ var ArticleSchema = new mongoose.Schema({
   subject: String,
   review: {
     type: Array,
-    default: 0
+    default: []
   },
   loveNum: {
     type: Number,
