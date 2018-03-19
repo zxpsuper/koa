@@ -3,9 +3,6 @@ async function findOne (name, Schema) {
   return new Promise((ok, fail) => {
     Schema.findOne(name, function (err, result) {
       if(err) fail(err)
-      // if (result == null) {
-      //   fail(new Error("not have data"));
-      // } 
       ok(result)
     })
   })
@@ -29,9 +26,27 @@ async function findAlls(Schema) {
     })
   })
 }
+async function update(Collect, name, obj) {
+  return new Promise((ok, fail) => {
+    Collect.update(name, obj, { new: true }, function (err, result) {
+      if (err) fail(err)
+      ok(result)
+    })
+  })
+}
+async function remove(Collect, name) {
+  return new Promise((ok, fail) => {
+    Collect.remove(name, function (err, result) {
+      if (err) fail(err)
+      ok(result)
+    })
+  })
+}
 const methods = {
   findOne,
   findAlls,
-  save
+  save,
+  update,
+  remove
 }
 module.exports = methods

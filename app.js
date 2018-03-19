@@ -14,7 +14,7 @@ var dbs = 'mongodb://localhost/super'
 mongoose.Promise = require('bluebird')
 mongoose.connect(dbs, {
   useMongoClient: true
-  /* other options */
+  /* other options */ 
 })
 
 var db = mongoose.connection
@@ -22,18 +22,17 @@ db.on('error', console.error.bind(console, 'connection error:'))
 db.once('open', function (callback) {
   // yay!
 })
+
 require('./app/models/user')
 require('./app/models/kit')
 require('./app/models/book')
-// router
-const index = require('./routes/index')
-index(app)
+require('./app/models/article')
+
 // error handler
 onerror(app)
-
 // middlewares
 app.use(bodyparser({
-  enableTypes:['json', 'form', 'text']
+  enableTypes: ['json', 'form', 'text']
 }))
 app.use(json())
 app.use(logger())
@@ -55,5 +54,6 @@ app.use(async (ctx, next) => {
 app.on('error', (err, ctx) => {
   console.error('server error', err, ctx)
 });
-
+const router = require('./routes/index')
+router(app)
 module.exports = app

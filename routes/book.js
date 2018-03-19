@@ -57,8 +57,6 @@ router.delete('/:name', async function (ctx, next) {
 // update返回的对象{n, nModified, ok} ——改
 router.post('/update', async function (ctx, next) {
   let { name, author, desc, review, publicTime } = ctx.request.body
-  console.log(name)
-			console.log(author)
   try{
 		let t = await update({name}, { $set: {author, desc, review, publicTime} })
 		console.log(t)

@@ -15,17 +15,17 @@ router.get('/', async function (ctx, next) {
 router.post('/register', async function (ctx, next) {
   // let userName = ctx.query.userName
   let { userName, password, phoneNumber, email } = ctx.request.body
-  let t = await M.findOne({userName: userName.toUpperCase()}, User)
+  let t = await M.findOne({userName}, User)
   if (t !== null) {
     ctx.response.body = {
       code: 202,
       message: '用户名已经存在'
     }
+    console.log(t)
     return
   }
 
   var silence = new User({ userName, password, phoneNumber, email })
-  silence.capitalizeName()
 
   // 保存用户储存信息
   await M.save(silence)
