@@ -6,10 +6,38 @@ var UserSchema = new mongoose.Schema({
     unique: true,
     type: String
   },
-  password: String,
-  age: String,
-  email: String,
-  score: Number,
+  password: {
+    type: String,
+    default: ''
+  },
+  age: {
+    type: String,
+    default: ''
+  },
+  signIn: {
+    type: Number,
+    default: 0
+  },
+  continueSignIn: {
+    type: Number,
+    default: 0
+  },
+  img: {
+    type: String,
+    default: ''
+  },
+  email: {
+    type: String,
+    default: ''
+  },
+  score: {
+    type: Number,
+    default: 0
+  },
+  signInTime: {
+    type: Date,
+    default: null
+  },
   meta: {
     createAt: {
       type: Date,
