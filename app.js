@@ -5,7 +5,8 @@ const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
-
+const cors = require('koa2-cors')
+app.use(cors())
 var fs = require('fs')
 var path = require('path')
 var mongoose = require('mongoose')
@@ -14,7 +15,7 @@ var dbs = 'mongodb://localhost/super'
 mongoose.Promise = require('bluebird')
 mongoose.connect(dbs, {
   useMongoClient: true
-  /* other options */ 
+  /* other options */
 })
 
 var db = mongoose.connection
