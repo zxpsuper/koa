@@ -7,7 +7,7 @@ var Article = mongoose.model('articles')
 router.prefix('/articles')
 // 创建文章
 router.post('/create', async function (ctx, next) {
-  let { title, author, authorImg, desc, subject } = ctx.request.body
+  let { title, author, authorImg, desc, subject, smallImg, digest } = ctx.request.body
   try {
     let t = await M.findOne({ title }, Article)
     if (t !== null) {
@@ -17,7 +17,7 @@ router.post('/create', async function (ctx, next) {
       }
       return
     }
-    var silence = new Article({ title, author, authorImg, desc, subject })
+    var silence = new Article({ title, author, authorImg, desc, subject, smallImg, digest })
     // 保存用户储存信息
     await M.save(silence)
     ctx.body = {
@@ -73,7 +73,7 @@ router.get('/getById/:id', async function (ctx, next) {
 })
 // 根据id更新文章
 router.post('/update', async function (ctx, next) {
-  let { id, title, author, authorImg, desc, subject } = ctx.request.body
+  let { id, title, author, authorImg, desc, subject, smallImg, digest } = ctx.request.body
   try {
     let t = await M.findOne({ _id: id }, Article)
     if (t === null) {
@@ -82,7 +82,7 @@ router.post('/update', async function (ctx, next) {
         message: 'id不存在'
       }
     } else {
-      let msg = await M.update(Article, { _id: id }, { title, author, authorImg, desc, subject })
+      let msg = await M.update(Article, { _id: id }, { title, author, authorImg, desc, subject, smallImg, digest })
       if (msg.nModified === 0) ctx.body = { code: 203, msg: "修改数据与初始数据一样，请重新修改" }
       else {
         ctx.body = {

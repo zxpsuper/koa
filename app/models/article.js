@@ -5,6 +5,8 @@ var ArticleSchema = new mongoose.Schema({
     type: String,
     default: ''
   },
+  smallImg: String,
+  digest: String,
   author: String,
   authorImg: String,
   desc: String,
@@ -37,4 +39,4 @@ var ArticleSchema = new mongoose.Schema({
 
 var ArticleModel = mongoose.model('articles', ArticleSchema)
 
-module.exports = ArticleModel 
+module.exports = ArticleModel
