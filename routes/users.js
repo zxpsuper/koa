@@ -131,6 +131,9 @@ router.get('/signIn/:id', async function (ctx, next) {
         await M.update(User, { _id: _id }, t)
         ctx.body = {
           code: 200,
+          data: {
+            score: t.score
+          },
           message: '签到成功'
         }
         return
