@@ -44,7 +44,8 @@ router.post('/register', async function (ctx, next) {
 // 获取所有用户
 router.get('/getAllUsers', async function (ctx, next) {
   try {
-    let t = await M.findAlls(User)
+    // let t = await M.findAlls(User)
+    let t = await User.find({})
     ctx.body = {
       code: 200,
       data: t,
@@ -148,9 +149,12 @@ router.get('/signIn/:id', async function (ctx, next) {
         t.meta.updateAt = new Date()
         t.signInTime = new Date()
         t.score += 1
-        await M.update(User, { _id: id }, t)
+        await M.update(User, { _id: _id }, t)
         ctx.body = {
           code: 200,
+          data: {
+            score: t.score
+          },
           message: '签到成功'
         }
         return

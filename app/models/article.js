@@ -31,11 +31,14 @@ var ArticleSchema = new mongoose.Schema({
   }
 })
 //存储前的毁掉函数
-/* ArticleSchema.pre('save', function (next) {
+ArticleSchema.pre('save', function (next) {
   if (!this.isNew) {
+    this.meta.createAt = this.meta.updateAt = Date.now()
+  } else {
     this.meta.updateAt = Date.now()
   }
-}) */
+  next()
+})
 
 var ArticleModel = mongoose.model('articles', ArticleSchema)
 

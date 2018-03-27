@@ -49,7 +49,15 @@ var UserSchema = new mongoose.Schema({
     }
   }
 })
-
+//存储前的毁掉函数
+UserSchema.pre('save', function (next) {
+  if (!this.isNew) {
+    this.meta.createAt = this.meta.updateAt = Date.now()
+  } else {
+    this.meta.updateAt = Date.now()
+  }
+  next()
+})
 // 定义表单方法——字符串转化为大写
 UserSchema.methods.capitalizeName = function () {
   this.userName = this.userName.toUpperCase();

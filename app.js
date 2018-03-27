@@ -1,3 +1,5 @@
+const glob = require('glob')
+const {resolve} = require('path')
 const Koa = require('koa')
 const app = new Koa()
 const views = require('koa-views')
@@ -23,11 +25,9 @@ db.on('error', console.error.bind(console, 'connection error:'))
 db.once('open', function (callback) {
   // yay!
 })
+// 引入所有的model
+glob.sync(resolve(__dirname, './app/models', '**/*.js')).forEach(require)
 
-require('./app/models/user')
-require('./app/models/kit')
-require('./app/models/book')
-require('./app/models/article')
 
 // error handler
 onerror(app)
